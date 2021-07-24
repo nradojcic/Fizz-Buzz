@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #1d5888;
-  --secondary-color: #ff993b;
-  --dark-color: #292929;
+  --primary-color: black;
+  --secondary-color: #ea006c;
+  --dark-color: rgb(0, 0, 47);
   --white-color: #e7e7e7;
 }
 
 .logoFont {
-  font-family: "Racing Sans One", cursive;
+  font-family: "Abril Fatface", cursive;
 }
 
 body {
@@ -41,6 +41,10 @@ h6 {
   color: var(--primary-color);
 }
 
+#btnSubmit {
+  background-color: var(--secondary-color) !important;
+}
+
 .bsicon {
   color: purple;
 }
@@ -59,6 +63,19 @@ h6 {
 
 .checklist > li i {
   color: var(--secondary-color);
+}
+
+.Fizz {
+  color: green;
+}
+
+.Buzz {
+  color: blue;
+}
+
+.FizzBuzz {
+  color: #ea006c;
+  font-weight: bold;
 }
 
 code[class*="language-"],

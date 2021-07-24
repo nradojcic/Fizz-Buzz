@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: a Coding Project by Nebojsa</title>
+    <title>Fizz Buzz: a Coding Project by Nebojsa</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -17,11 +17,11 @@
       crossorigin="anonymous"
     />
 
-    <!-- Google Fonts Racing Sans One -->
+    <!-- Google Fonts Abril Fatface -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
       rel="stylesheet"
     />
 
@@ -45,7 +45,7 @@
             height="24"
             alt="Nebojsa Logo"
           />
-          APP NAME</a
+          Fizz Buzz</a
         >
         <button
           class="navbar-toggler"
@@ -72,7 +72,12 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">GitHub Repo</a>
+              <a
+                class="nav-link"
+                href="https://github.com/nradojcic/Fizz-Buzz"
+                target="_blank"
+                >GitHub Repo</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://nebojsa.ca" target="_blank"
@@ -88,27 +93,258 @@
     <main class="flex-shrink-0">
       <div class="container py-5 px-5 mt-5">
         <h2 class="border-1 border-bottom border-dark">
-          The Code for <span class="logoFont">APP NAME</span>
+          The Code for <span class="logoFont">Fizz Buzz</span>
         </h2>
         <div class="row row-cols-1 row-cols-lg-2">
           <!-- Left - Prism Code - paste your code between <code> tags -->
           <div class="col-lg-8">
             <pre class="line-numbers"><code class="language-javascript">
-                // Call Hello World
-                function HelloWorld() {
-                    alert("Hello World");
+                // get Fizz and Buzz values from the user, the defaults are 3 and 5
+                // Controller function
+                function getValues() {
+                  // get user values from the page
+                  let fizzValue = document.getElementById("fizzValue").value;
+                  let buzzValue = document.getElementById("buzzValue").value;
+
+                  // parse for numbers
+                  fizzValue = parseInt(fizzValue);
+                  buzzValue = parseInt(buzzValue);
+
+                  // check that the numbers are integers
+                  if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+                    
+                    // determine FizzBuzz values
+                    let fbArray = fizzBuzz(fizzValue, buzzValue);
+
+                    // show the values on the webpage
+                    displayData(fbArray);
+
+                  } else {
+                    alert("You must enter integer numbers!");
+                  }
+                }
+
+                // do FizzBuzz calculations - version #1 If/Else
+                // Logic function
+                function fizzBuzz(fizzValue, buzzValue) {
+                  let returnArray = [];
+
+                  for (let i = 1; i <= 100; i++) {
+                    // check each value in three steps
+                    if (i % fizzValue == 0 && i % buzzValue == 0) {
+                      returnArray.push("FizzBuzz");
+                    }
+                    else if (i % fizzValue == 0) {
+                      returnArray.push("Fizz");
+                    }
+                    else if (i % buzzValue == 0) {
+                      returnArray.push("Buzz");
+                    }
+                    else {
+                      returnArray.push(i);
+                    }
+                  }
+
+                  return returnArray;
+                }
+
+                // fizzBuzz version #2 using Switch Statement
+                function fizzBuzz2(fizzValue, buzzValue) {
+                  let returnArray = [];
+                  let Fizz = false;
+                  let Buzz = false;
+
+                  for (let i = 1; i <= 100; i++) {
+                    Fizz = i % fizzValue == 0;
+                    Buzz = i % buzzValue == 0;
+
+                    switch (true) {
+                      case Fizz && Buzz: {
+                        returnArray.push("FizzBuzz");
+                        break;
+                      }
+                      case Fizz: {
+                        returnArray.push("Fizz");
+                        break;
+                      }
+                      case Buzz: {
+                        returnArray.push("Buzz");
+                        break;
+                      }
+                      default: {
+                        returnArray.push(i);
+                        break;
+                      }
+                    }
+                  }
+
+                  return returnArray;
+                }
+
+                // fizzbuzz version #3 using Ternary Operator
+                function fizzBuzz3(fizzValue, buzzValue) {
+                  let returnArray = [];
+
+                  for (let i = 1; i <= 100; i++) {
+                    let value = (i % fizzValue == 0 ? "Fizz" : "") + 
+                                (i % buzzValue == 0 ? "Buzz" : "") || i;
+
+                    returnArray.push(value);
+                  }
+
+                  return returnArray;
+                }
+
+                // loop over the FizzBuzz array and display 5 values per row
+                // View function
+                function displayData(fbArray) {
+                  // get the table body element from the page
+                  let tableBody = document.getElementById("results");
+
+                  // get the template row
+                  let templateRow = document.getElementById("fbTemplate");
+
+                  // clear the table first, just in case
+                  tableBody.innerHTML = "";
+
+                  for (let i = 0; i < fbArray.length; i += 5) {
+                    let tableRow = document.importNode(templateRow.content, true);
+
+                    // grab just the &lt;td>'s and put them into an array
+                    let rowCols = tableRow.querySelectorAll("td");
+
+                    // add value to each column, and assign a class to style it
+                    rowCols[0].classList.add(fbArray[i]);
+                    rowCols[0].textContent = fbArray[i];
+
+                    rowCols[1].classList.add(fbArray[i + 1]);
+                    rowCols[1].textContent = fbArray[i + 1];
+
+                    rowCols[2].classList.add(fbArray[i + 2]);
+                    rowCols[2].textContent = fbArray[i + 2];
+
+                    rowCols[3].classList.add(fbArray[i + 3]);
+                    rowCols[3].textContent = fbArray[i + 3];
+
+                    rowCols[4].classList.add(fbArray[i + 4]);
+                    rowCols[4].textContent = fbArray[i + 4];
+
+                    // add the row to the table
+                    tableBody.appendChild(tableRow);
+                  }
                 }
                 </code>
             </pre>
           </div>
           <!-- Right - Code Description -->
           <div class="col-lg-4">
-            <p>The Code is structured in one function.</p>
-            <h5>Hello World</h5>
-            <p>
-              Hello World is a function that displays an allert with a message
-              of "Hello World"
+            <p class="mt-3">
+              The Code is structured in <strong>three functions</strong>.
             </p>
+            <h5 class="mt-4">1) <strong>getValues</strong> function</h5>
+            <p>
+              Function <strong>getValues</strong> is the Controller function. It
+              is triggered by an onClick event connected to a button on the App
+              page. It then collects Fizz and Buzz Values from the input fields
+              on the page, and routes requests to other functions.
+            </p>
+            <p>
+              It validates the input, converting the values to integers. If
+              entered values are valid integer numbers it will call the
+              <strong>fizzBuzz</strong> function to calculate Fizz Buzz, and
+              then the <strong>displayData</strong> function. Otherwise it will
+              show an alert to enter only integer values.
+            </p>
+            <h5 class="mt-5">
+              2.1) <strong>fizzBuzz</strong> function - If/Else version
+            </h5>
+            <p>
+              Function <strong>fizzBuzz</strong> is the Logic function. This
+              first version uses IF/Else statements.
+            </p>
+            <p>
+              It accepts Fizz and Buzz Value arguments. For each number from 1
+              to 100 it performs checks in 3 steps using If/Else statements,
+              assigning apropriate value to
+              <strong>returnArray</strong>.
+            </p>
+            <p>
+              The value is: Fizz, Buzz or FizzBuzz - if the number is divisible
+              by <strong>fizzValue</strong>, <strong>buzzValue</strong> or both
+              at the same time. Otherwise, if not divisible by any of these, it
+              assigns the number to the returnArray.
+            </p>
+            <p>
+              After looping through all the 100 numbers, it returns the final
+              Fizz Buzz <strong>returnArray</strong>.
+            </p>
+            <h5 class="mt-5">
+              2.2) <strong>fizzBuzz2</strong> function - Switch version
+            </h5>
+            <p>
+              Function <strong>fizzBuzz</strong> is the Logic function. This
+              second version uses Switch statement.
+            </p>
+            <p>
+              It accepts Fizz and Buzz Value arguments. For each number from 1
+              to 100 it performs the same checks as the first version, but using
+              the Switch statement syntax.
+            </p>
+            <p>
+              After looping through all the 100 numbers, it returns the final
+              Fizz Buzz <strong>returnArray</strong>
+            </p>
+            <h5 class="mt-5">
+              2.3) <strong>fizzBuzz3</strong> function - Ternary Operator
+              version
+            </h5>
+            <p>
+              Function <strong>fizzBuzz</strong> is the Logic function. This
+              third version uses Ternary operator.
+            </p>
+            <p>
+              It accepts Fizz and Buzz Value arguments. For each number from 1
+              to 100 it performs the same checks as the first version, but
+              rewriting If/Else statements using Ternary operator syntax in a
+              single line of code.
+            </p>
+            <p>
+              The <strong>value</strong> variable has 4 possible oucomes -
+              "Fizz", "Buzz", concatenated Fizz and Buzz (ie. "FizzBuzz") or the
+              current number - <strong>i</strong>. This evaluation uses the fact
+              that logical OR operator (ie. ||) can operate on strings and
+              integers too, not only on true/false Boolean values. In this case,
+              it will evaluate to number <strong>i</strong> only if the value on
+              the left side of OR operator is empty string (ie. "").
+            </p>
+            <p>
+              After looping through all the 100 numbers, it returns the final
+              Fizz Buzz <strong>returnArray</strong>
+            </p>
+            <h5 class="mt-5">3) <strong>displayData</strong> function</h5>
+            <p>
+              Function <strong>displayData</strong> is the View function. It
+              displays Fizz Buzz data on the web page.
+            </p>
+            <p>
+              It accepts an array of Fizz Buzz string values as the argument.
+              And then uses template tag method to format the output table with
+              5 columns per row. The row template is defined inside
+              <strong>app.html</strong> file using &lt;template>, &lt;td> and
+              &lt;tr> HTML tags.
+            </p>
+            <p>
+              A FOR loop runs from the start to the end of
+              <strong>fbData</strong> array, in steps of 5 - taking values for
+              each row of the table, consisting of 5 cells.
+            </p>
+            <p>
+              For each value a CSS class name equal to its value is assigned
+              (ie. Fizz, Buzz, FizzBuzz - classes defined in .css file). And the
+              value is inserted into <strong>rowCols</strong> array of row
+              values.
+            </p>
+            <p>Each table row is then displayed on the webpage.</p>
           </div>
         </div>
       </div>
@@ -159,7 +395,7 @@
                   ><i class="fab fa-github fa-2x"></i
                 ></a>
               </div>
-              <div class="col social">
+              <!-- <div class="col social">
                 <a href="#" target="_blank"
                   ><i class="fab fa-twitter fa-2x"></i
                 ></a>
@@ -168,7 +404,7 @@
                 <a href="#" target="_blank"
                   ><i class="fab fa-youtube fa-2x"></i
                 ></a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

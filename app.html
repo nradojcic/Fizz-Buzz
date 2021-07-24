@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: a Coding Project by Nebojsa</title>
+    <title>Fizz Buzz: a Coding Project by Nebojsa</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -17,11 +17,11 @@
       crossorigin="anonymous"
     />
 
-    <!-- Google Fonts Racing Sans One -->
+    <!-- Google Fonts Abril Fatface -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
       rel="stylesheet"
     />
 
@@ -44,7 +44,7 @@
             height="24"
             alt="Nebojsa Logo"
           />
-          APP NAME</a
+          Fizz Buzz</a
         >
         <button
           class="navbar-toggler"
@@ -71,7 +71,12 @@
               <a class="nav-link" href="code.html">The Code</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">GitHub Repo</a>
+              <a
+                class="nav-link"
+                href="https://github.com/nradojcic/Fizz-Buzz"
+                target="_blank"
+                >GitHub Repo</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://nebojsa.ca" target="_blank"
@@ -85,7 +90,79 @@
 
     <!-- === Main Section === -->
     <main class="flex-shrink-0">
-      <div class="container mt-5"></div>
+      <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-lg-2">
+          <!-- Left Column -->
+          <div class="col col-lg-4 border-end border-2">
+            <h3 class="fw-bold lh-1 mb-3">
+              <span class="logoFont">Fizz Buzz</span> - a Coding Project
+            </h3>
+            <!-- Project Description -->
+            <h4 class="lead">
+              When it counts, you Fizz Buzz. A JavaScript coding exercise using
+              loops. Write a program that prints the numbers from 1 to 100. For
+              the multiples of 3 display <strong>"Fizz"</strong> instead of the
+              number. For the multiples of 5 display <strong>"Buzz"</strong>.
+              And for the multiples of both 3 and 5 display
+              <strong>"FizzBuzz"</strong>!
+            </h4>
+            <!-- Instructions -->
+            <h2 class="mt-2 mt-md-5">Instructions</h2>
+            <p>
+              Choose values for Fizz and Buzz. Then click the button to see the
+              results!
+            </p>
+          </div>
+          <!-- Right Column -->
+          <div class="col col-lg-8">
+            <div>
+              <h5>Enter Fizz Buzz Values</h5>
+              <form class="row gy-2 gx-3">
+                <div class="col">
+                  <label>Fizz</label>
+                  <input
+                    id="fizzValue"
+                    type="number"
+                    class="form-control"
+                    placeholder="Fizz Value"
+                    value="3"
+                    aria-label="Fizz Value"
+                  />
+                </div>
+                <div class="col">
+                  <label>Buzz</label>
+                  <input
+                    id="buzzValue"
+                    type="number"
+                    class="form-control"
+                    placeholder="Buzz Value"
+                    value="5"
+                    aria-label="Buzz Value"
+                  />
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    id="btnSubmit"
+                    type="button"
+                    class="btn btn-dark btn-lg"
+                  >
+                    Fizz Buzz it
+                  </button>
+                </div>
+              </form>
+              <!-- Show Fizz Buzz Results -->
+              <h2 class="mt-5 border-2 border-bottom">Fizz Buzz</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                  <tbody id="results">
+                    <!-- Fizz Buzz Results go here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- === Footer Section === -->
@@ -133,7 +210,7 @@
                   ><i class="fab fa-github fa-2x"></i
                 ></a>
               </div>
-              <div class="col social">
+              <!-- <div class="col social">
                 <a href="#" target="_blank"
                   ><i class="fab fa-twitter fa-2x"></i
                 ></a>
@@ -142,12 +219,23 @@
                 <a href="#" target="_blank"
                   ><i class="fab fa-youtube fa-2x"></i
                 ></a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </footer>
+
+    <!-- Template tag to show Fizz Buzz table-->
+    <template id="fbTemplate">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </template>
 
     <!-- Bootstrap JS -->
     <script
@@ -156,5 +244,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/site.js"></script>
+    <script>
+      document.getElementById("btnSubmit").addEventListener("click", getValues);
+    </script>
   </body>
 </html>
